@@ -14,12 +14,12 @@
         }
 
         .navbar {
-            background-color: rgba(255, 165, 0, 0.8); /* Warna oranye dengan transparansi */
+            background-color: rgba(255, 165, 0, 0.8);
         }
 
         .container {
             margin-top: 50px;
-            background-color: rgba(0, 0, 0, 0.6); /* Latar belakang transparan */
+            background-color: rgba(0, 0, 0, 0.6);
             padding: 30px;
             border-radius: 10px;
         }
@@ -57,6 +57,11 @@
             margin-right: 10px;
             border-radius: 5px;
         }
+
+        /* Sembunyikan daftar buku pada awalnya */
+        #daftarBuku {
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -82,8 +87,11 @@
             </div>
         </div>
 
+        <!-- Tombol untuk melihat daftar buku -->
+        <button id="tombolDaftarBuku" class="btn btn-primary" onclick="toggleDaftarBuku()">Lihat Daftar Buku</button>
+
         <!-- Daftar Buku -->
-        <div class="card">
+        <div id="daftarBuku" class="card">
             <div class="card-body">
                 <h3 class="card-title">Daftar Buku</h3>
                 <table class="table table-striped text-white">
@@ -98,14 +106,16 @@
                     </thead>
                     <tbody>
                         <?php
-                        // Mengambil data buku dari database menggunakan prepared statement untuk keamanan
-                        $stmt = $conn->prepare("SELECT * FROM buku");
-                        $stmt->execute();
-                        $result = $stmt->get_result();
+                        // Menyertakan file koneksi
+                        include('koneksi.php');
 
-                        if ($result->num_rows > 0) {
+                        // Mengambil data buku dari database
+                        $query = "SELECT * FROM buku";
+                        $result = mysqli_query($koneksi, $query);
+
+                        if (mysqli_num_rows($result) > 0) {
                             // Menampilkan data buku
-                            while ($row = $result->fetch_assoc()) {
+                            while ($row = mysqli_fetch_assoc($result)) {
                                 echo "<tr>";
                                 echo "<td>" . htmlspecialchars($row["id"]) . "</td>"; // ID buku
                                 echo "<td>" . htmlspecialchars($row["judul"]) . "</td>"; // Judul buku
@@ -125,9 +135,6 @@
                         } else {
                             echo "<tr><td colspan='5' class='text-center'>Tidak ada data buku</td></tr>";
                         }
-
-                        // Menutup prepared statement
-                        $stmt->close();
                         ?>
                     </tbody>
                 </table>
@@ -137,6 +144,23 @@
         <!-- Tombol Kembali -->
         <a href="index.php" class="btn btn-secondary">Kembali ke Halaman Utama</a>
     </div>
+
+    <script>
+        // Fungsi untuk menyembunyikan/menampilkan daftar buku
+        function toggleDaftarBuku() {
+            var daftarBuku = document.getElementById('daftarBuku');
+            var tombol = document.getElementById('tombolDaftarBuku');
+
+            // Jika daftar buku tersembunyi, tampilkan; jika sudah tampil, sembunyikan
+            if (daftarBuku.style.display === 'none') {
+                daftarBuku.style.display = 'block';
+                tombol.innerHTML = 'Sembunyikan Daftar Buku';
+            } else {
+                daftarBuku.style.display = 'none';
+                tombol.innerHTML = 'Lihat Daftar Buku';
+            }
+        }
+    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
