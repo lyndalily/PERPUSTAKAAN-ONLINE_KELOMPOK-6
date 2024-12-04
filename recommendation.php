@@ -14,12 +14,12 @@
         }
 
         .navbar {
-            background-color: rgba(255, 165, 0, 0.8); /* Warna oranye dengan transparansi */
+            background-color: rgba(255, 165, 0, 0.8);
         }
 
         .container {
             margin-top: 50px;
-            background-color: rgba(0, 0, 0, 0.6); /* Latar belakang transparan */
+            background-color: rgba(0, 0, 0, 0.6);
             padding: 30px;
             border-radius: 10px;
         }
@@ -119,6 +119,43 @@
             display: flex;
             flex-wrap: wrap;
         }
+
+        .borrow-form {
+            display: none;
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .borrow-list {
+            margin-top: 20px;
+            color: white;
+        }
+
+        .back-button {
+            margin-top: 20px;
+            background-color: #1e7e34;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .back-button:hover {
+            background-color: #155d27;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
     </style>
 </head>
 <body>
@@ -137,81 +174,160 @@
             <option value="fantasi">Fantasi</option>
             <option value="misteri">Misteri</option>
             <option value="romansa">Romansa</option>
+            <option value="komik">Komik</option>
+            <option value="sejarah">Sejarah</option>
         </select>
 
         <!-- Rekomendasi Buku -->
-
-        <!-- Fiksi -->
         <div class="row genre-books" id="fiksi">
             <div class="col-md-4">
                 <div class="book-card">
                     <img src="Milea.jpg" alt="Buku Fiksi 1">
                     <h4>Milea Suara dari Dilan</h4>
                     <p>Penulis: Pidi Baiq</p>
-                    <p>Suara dari Dilan adalah novel kedua dalam seri Dilan karya Pidi Baiq...</p>
-                    <button class="btn-read-more" onclick="toggleDescription('book1')">Baca Selengkapnya</button>
-                    <div id="book1" class="more-content">
-                        <p>Suara dari Dilan adalah lanjutan kisah cinta remaja Dilan dan Milea...</p>
-                    </div>
                     <button class="btn-borrow" onclick="borrowBook('Milea Suara dari Dilan')">Pinjam Buku</button>
                 </div>
             </div>
-            <!-- Buku Fiksi 2 -->
             <div class="col-md-4">
                 <div class="book-card">
                     <img src="Dilan.jpg" alt="Buku Fiksi 2">
                     <h4>Dilan 1990</h4>
                     <p>Penulis: Pidi Baiq</p>
-                    <p>Dilan 1990 adalah cerita cinta remaja yang berlatar belakang kehidupan Bandung...</p>
-                    <button class="btn-read-more" onclick="toggleDescription('book2')">Baca Selengkapnya</button>
-                    <div id="book2" class="more-content">
-                        <p>Dilan 1990 menceritakan kisah Dilan yang jatuh cinta dengan Milea di tahun 1990...</p>
-                    </div>
                     <button class="btn-borrow" onclick="borrowBook('Dilan 1990')">Pinjam Buku</button>
                 </div>
             </div>
-            <!-- Buku Fiksi 3 -->
             <div class="col-md-4">
                 <div class="book-card">
                     <img src="Laskar Pelangi.jpg" alt="Buku Fiksi 3">
                     <h4>Laskar Pelangi</h4>
                     <p>Penulis: Andrea Hirata</p>
-                    <p>Laskar Pelangi adalah novel karya Andrea Hirata yang mengisahkan perjuangan sekelompok anak-anak dari desa Gantung, Belitung, untuk mendapatkan pendidikan.</p>
-                    <button class="btn-read-more" onclick="toggleDescription('book3')">Baca Selengkapnya</button>
-                    <div id="book3" class="more-content">
-                        <p>Laskar Pelangi adalah novel karya Andrea Hirata yang menceritakan kisah sekelompok anak-anak dari desa Gantung, Belitung...</p>
-                    </div>
                     <button class="btn-borrow" onclick="borrowBook('Laskar Pelangi')">Pinjam Buku</button>
                 </div>
             </div>
         </div>
 
-        <!-- Javascript untuk peminjaman buku -->
-        <script>
-            function borrowBook(bookTitle) {
-                alert("Anda telah meminjam buku: " + bookTitle);
-            }
+         <!-- Additional Genre Cards -->
+        <!-- non-fiksi -->
+        <div class="row genre-books" id="non-fiksi" style="display: none;">
+            <div class="col-md-4">
+                <div class="book-card">
+                    <img src="Bj.Habibie.jpg" alt="Buku non-fiksi 1">
+                    <h4>Kisah Inspirasi Bj. Habibie</h4>
+                    <p>Penulis: Bj. Habibie</p>
+                    <button class="btn-borrow" onclick="borrowBook('Kisah Inspirasi Bj. Habibie')">Pinjam Buku</button>
+                </div>
+            </div>
+        </div>
 
-            function toggleDescription(bookId) {
-                var content = document.getElementById(bookId);
-                if (content.style.display === "none") {
-                    content.style.display = "block";
-                } else {
-                    content.style.display = "none";
-                }
-            }
+          <!-- Additional Genre Cards -->
+        <!-- fantasi -->
+        <div class="row genre-books" id="fantasi" style="display: none;">
+            <div class="col-md-4">
+                <div class="book-card">
+                    <img src="theDragonRepublic.jpg" alt="Buku fantasi 1">
+                    <h4>The Dragon Republic</h4>
+                    <p>Penulis: R. F. Kuang</p>
+                    <button class="btn-borrow" onclick="borrowBook('The Dragon Republic')">Pinjam Buku</button>
+                </div>
+            </div>
+        </div>
 
-            function showBooksByGenre() {
-                var genre = document.getElementById('genre-dropdown').value;
-                var genres = document.querySelectorAll('.genre-books');
-                genres.forEach(function (section) {
-                    section.style.display = 'none';
-                });
-                if (genre) {
-                    document.getElementById(genre).style.display = 'flex';
-                }
-            }
-        </script>
+          <!-- Additional Genre Cards -->
+        <!-- Misteri -->
+        <div class="row genre-books" id="misteri" style="display: none;">
+            <div class="col-md-4">
+                <div class="book-card">
+                    <img src="MisteriKehidupanSetelahKematian.jpg" alt="Buku misteri 1">
+                    <h4>Misteri Kehidupan Setelah Kematian</h4>
+                    <p>Penulis: Miftahul Asror Malik</p>
+                    <button class="btn-borrow" onclick="borrowBook('Misteri Kehidupan Setelah Kematian')">Pinjam Buku</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Additional Genre Cards -->
+        <!-- Romansa -->
+        <div class="row genre-books" id="romansa" style="display: none;">
+            <div class="col-md-4">
+                <div class="book-card">
+                    <img src="P.S. I Love You.jpg" alt="Buku romansa 1">
+                    <h4>P.S. I Love You</h4>
+                    <p>Penulis: Cecelia Aherin</p>
+                    <button class="btn-borrow" onclick="borrowBook('P.S. I Love You')">Pinjam Buku</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Additional Genre Cards -->
+        <!-- Komik -->
+        <div class="row genre-books" id="komik" style="display: none;">
+            <div class="col-md-4">
+                <div class="book-card">
+                    <img src="OnePiece.jpg" alt="Buku Komik 1">
+                    <h4>One Piece</h4>
+                    <p>Penulis: Eiichiro Oda</p>
+                    <button class="btn-borrow" onclick="borrowBook('One Piece')">Pinjam Buku</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sejarah -->
+        <div class="row genre-books" id="sejarah" style="display: none;">
+            <div class="col-md-4">
+                <div class="book-card">
+                    <img src="Sejarah Dunia.jpg" alt="Buku Sejarah 1">
+                    <h4>Sejarah Dunia abad pertengahan</h4>
+                    <p>Penulis: Susan Wise Bauer</p>
+                    <button class="btn-borrow" onclick="borrowBook('Sejarah Dunia abad pertengahan')">Pinjam Buku</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Back to Main Portal Button -->
+        <button class="back-button" onclick="window.location.href='index.html'">Kembali ke Portal Utama</button>
+
+        <!-- Form Peminjaman Buku -->
+        <div id="borrow-form" class="borrow-form">
+            <h3>Formulir Peminjaman Buku</h3>
+            <form id="borrow-book-form">
+                <label for="name">Nama:</label>
+                <input type="text" id="name" class="form-control" required>
+                <label for="email">Email:</label>
+                <input type="email" id="email" class="form-control" required>
+                <button type="submit" class="btn btn-primary">Simpan</button>
+            </form>
+        </div>
+
+        <!-- Daftar Peminjam Buku -->
+        <div id="borrow-list" class="borrow-list">
+            <h3>Daftar Peminjam Buku</h3>
+            <ul id="borrow-list-ul"></ul>
+        </div>
     </div>
+    
+    <script>
+        function showBooksByGenre() {
+            const genre = document.getElementById('genre-dropdown').value;
+            const genres = ['fiksi', 'non-fiksi', 'fantasi', 'misteri', 'romansa', 'komik', 'sejarah'];
+            genres.forEach(function(id) {
+                document.getElementById(id).style.display = id === genre ? 'block' : 'none';
+            });
+        }
+
+        function borrowBook(bookName) {
+            document.getElementById('borrow-form').style.display = 'block';
+        }
+
+        document.getElementById('borrow-book-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const bookName = document.querySelector('.book-card button').getAttribute('onclick').match(/'(.*)'/)[1];
+
+            const listItem = document.createElement('li');
+            listItem.textContent = `${name} (${email}) telah meminjam "${bookName}"`;
+            document.getElementById('borrow-list-ul').appendChild(listItem);
+        });
+    </script>
 </body>
 </html>
